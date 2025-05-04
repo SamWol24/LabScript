@@ -1,7 +1,28 @@
 ﻿@page "/"
+@inject IJSRuntime ijsRuntime;
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>Hello, @test!</h1>
 
 Welcome to your new app.
+
+<script>
+    //se encapsula
+    function jsFuncion() 
+    {
+    alert("Hola a Todos");
+    }
+
+</script>
+@code{
+    string test = "Samir";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await ijsRuntime.InvokeVoidAsync("jsFuncion", null);
+        }
+    }
+}
